@@ -3,9 +3,11 @@ import './Calculator.css';
 import {connect} from "react-redux";
 
 
+
+
 class Calculator extends Component {
     render() {
-        const {result, calc_string, calculateResult, decreaseCounter, showNumber, removeNumber, operatorClick} = this.props;
+        const {result, calc_string, calculateResult, showNumber, removeNumber, operatorClick} = this.props;
         return (
             <div className="calculator">
 
@@ -22,10 +24,14 @@ class Calculator extends Component {
                     <button type="button" value="8" onClick={() => showNumber(8)}>8</button>
                     <button type="button" value="9" onClick={() => showNumber(9)}>9</button>
 
+                    <button type="button" className="equal-sign" value="=" onClick={calculateResult}>=</button>
+
 
                     <button type="button" value="4" onClick={() => showNumber(4)}>4</button>
                     <button type="button" value="5" onClick={() => showNumber(5)}>5</button>
                     <button type="button" value="6" onClick={() => showNumber(6)}>6</button>
+
+                    <button type="button" className="all-clear" value="all-clear" onClick={removeNumber}>AC</button>
 
 
                     <button type="button" value="1" onClick={() => showNumber(1)}>1</button>
@@ -34,16 +40,14 @@ class Calculator extends Component {
 
 
                     <button type="button" value="0" onClick={() => showNumber(0)}>0</button>
-                    <button type="button" className="decimal" value=".">.</button>
-                    <button type="button" className="all-clear" value="all-clear" onClick={removeNumber}>AC</button>
 
-                    <button type="button" className="equal-sign" value="=" onClick={calculateResult}>=</button>
 
                 </div>
             </div>
         );
     }
 }
+
 
 const mapStateToProps = state => {
     return {
@@ -56,7 +60,7 @@ const mapDispatchToProps = dispatch => {
     return {
         increaseCounter: () => dispatch({type: 'INCREMENT'}),
         decreaseCounter: () => dispatch({type: 'DECREMENT'}),
-        showNumber:(number) => dispatch({type: 'SHOW_NUMBER', number}),
+        showNumber:(number) => dispatch({type: 'ENTER_NUMBER', number}),
         removeNumber:() => dispatch({type: 'DELETE_NUMBER'}),
         operatorClick: (operator) => dispatch({type: 'OPERATOR', operator}),
         calculateResult: () => dispatch({type: 'CALC'})

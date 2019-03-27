@@ -1,5 +1,5 @@
 const initialState = {
-    result: 0,
+    result: null,
     calc_string: "",
     value1: 0,
     operator: null,
@@ -10,11 +10,15 @@ const reducer = (state = initialState, action) => {
         case 'OPERATOR':
             return {...state, operator: action.operator, value1: parseInt(state.calc_string), calc_string: ""};
         case 'CALC':
-            return {...state, calc_string: calculateResult(state.value1, parseInt(state.calc_string), state.operator)};
+            return {...state, result: calculateResult(state.value1, parseInt(state.calc_string), state.operator)};
         case 'ENTER_NUMBER':
-            return {...state, calc_string: state.calc_string + action.number};
+            if (state.result){
+                return {...state, calc_string: action.number, result: null}
+            } else {
+                return {...state, calc_string: state.calc_string + action.number};
+            }
         case 'DELETE_NUMBER':
-            return {...state, calc_string: state.calc_string.slice(0,-1)};
+            return {...state, calc_string: deleteSymbol(state.calc_string)};
         default:
             return state;
     }
@@ -34,5 +38,17 @@ const calculateResult = (value1, value2, operator) => {
 
     return result;
 }
+const deleteSymbol = (string) => {
+    if (string.length>0){
+        return string.slice(0,-1);
+    }
+    return string;
+}
 
+const enterSymbol = (string, result, symbol) =>{
+    if (result) {
+        return symbol;
+
+    }
+}
 export default reducer;

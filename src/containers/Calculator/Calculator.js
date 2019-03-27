@@ -8,10 +8,16 @@ import {connect} from "react-redux";
 class Calculator extends Component {
     render() {
         const {result, calc_string, calculateResult, showNumber, removeNumber, operatorClick} = this.props;
+        let displayValue;
+        if (result) {
+            displayValue = result;
+        } else {
+            displayValue = calc_string;
+        }
         return (
             <div className="calculator">
 
-                <input type="text" className="calculator-screen" value={calc_string} disabled/>
+                <input type="text" className="calculator-screen" value={displayValue} disabled/>
 
                 <div className="calculator-keys">
 

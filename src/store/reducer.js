@@ -1,21 +1,20 @@
 const initialState = {
-    counter: 10
-};
-
-const subCounter = (state, action) => {
-    return {...state, counter: state.counter - action.amount}
+    result: 0,
+    calc_string: "",
 };
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case 'INCREMENT':
-            return {...state, counter: state.counter + 1};
+            return {...state, result: state.result + 1};
         case 'DECREMENT':
-            return {...state, counter: state.counter - 1};
+            return {...state, result: state.result - 1};
         case 'ADD_COUNTER':
-            return {...state, counter: state.counter + action.amount};
+            return {...state, result: state.result + action.amount};
         case 'SUB_COUNTER':
-            return subCounter(state, action);
+            return {...state, result: state.result - action.amount};
+        case 'SHOW_NUMBER':
+            return {...state, calc_string: state.calc_string + action.number};
         default:
             return state;
     }

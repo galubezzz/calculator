@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 
 class Calculator extends Component {
     render() {
-        const {result, calc_string, increaseCounter, decreaseCounter, addCounter, subCounter, showNumber} = this.props;
+        const {result, calc_string, calculateResult, decreaseCounter, showNumber, removeNumber, operatorClick} = this.props;
         return (
             <div className="calculator">
 
@@ -13,31 +13,31 @@ class Calculator extends Component {
 
                 <div className="calculator-keys">
 
-                    <button type="button" className="operator" value="+" onClick={increaseCounter}>+</button>
-                    <button type="button" className="operator" value="-" onClick={decreaseCounter}>-</button>
-                    <button type="button" className="operator" value="*">&times;</button>
-                    <button type="button" className="operator" value="/">&divide;</button>
+                    <button type="button" className="operator" value="+" onClick={() => operatorClick("+")}>+</button>
+                    <button type="button" className="operator" value="-" onClick={() => operatorClick("-")}>-</button>
+                    <button type="button" className="operator" value="*" onClick={() => operatorClick("*")}>&times;</button>
+                    <button type="button" className="operator" value="/" onClick={() => operatorClick("/")}>&divide;</button>
 
                     <button type="button" value="7" onClick={() => showNumber(7)}>7</button>
-                    <button type="button" value="8">8</button>
-                    <button type="button" value="9">9</button>
+                    <button type="button" value="8" onClick={() => showNumber(8)}>8</button>
+                    <button type="button" value="9" onClick={() => showNumber(9)}>9</button>
 
 
-                    <button type="button" value="4">4</button>
-                    <button type="button" value="5">5</button>
-                    <button type="button" value="6">6</button>
+                    <button type="button" value="4" onClick={() => showNumber(4)}>4</button>
+                    <button type="button" value="5" onClick={() => showNumber(5)}>5</button>
+                    <button type="button" value="6" onClick={() => showNumber(6)}>6</button>
 
 
-                    <button type="button" value="1">1</button>
-                    <button type="button" value="2">2</button>
-                    <button type="button" value="3">3</button>
+                    <button type="button" value="1" onClick={() => showNumber(1)}>1</button>
+                    <button type="button" value="2" onClick={() => showNumber(2)}>2</button>
+                    <button type="button" value="3" onClick={() => showNumber(3)}>3</button>
 
 
-                    <button type="button" value="0">0</button>
+                    <button type="button" value="0" onClick={() => showNumber(0)}>0</button>
                     <button type="button" className="decimal" value=".">.</button>
-                    <button type="button" className="all-clear" value="all-clear">AC</button>
+                    <button type="button" className="all-clear" value="all-clear" onClick={removeNumber}>AC</button>
 
-                    <button type="button" className="equal-sign" value="=">=</button>
+                    <button type="button" className="equal-sign" value="=" onClick={calculateResult}>=</button>
 
                 </div>
             </div>
@@ -57,8 +57,9 @@ const mapDispatchToProps = dispatch => {
         increaseCounter: () => dispatch({type: 'INCREMENT'}),
         decreaseCounter: () => dispatch({type: 'DECREMENT'}),
         showNumber:(number) => dispatch({type: 'SHOW_NUMBER', number}),
-        addValue1: (amount) => dispatch({type: 'ADD_COUNTER', amount}),
-        addValue2: (amount) => dispatch({type: 'SUB_COUNTER', amount})
+        removeNumber:() => dispatch({type: 'DELETE_NUMBER'}),
+        operatorClick: (operator) => dispatch({type: 'OPERATOR', operator}),
+        calculateResult: () => dispatch({type: 'CALC'})
     };
 };
 
